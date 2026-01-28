@@ -91,7 +91,9 @@ button.voltar {
 </div>
 
 <script>
-let roteiro = {
+const versaoRoteiro = "v2";
+
+const roteiroPadrao = {
     dia1: [
         "⏰ Acordar",
         "✈️ Aeroporto Galeão → POA",
@@ -135,6 +137,20 @@ let roteiro = {
     ]
 };
 
+let roteiro;
+
+function inicializar(){
+    const versaoSalva = localStorage.getItem("versaoRoteiro");
+
+    if(versaoSalva !== versaoRoteiro){
+        roteiro = roteiroPadrao;
+        salvar();
+        localStorage.setItem("versaoRoteiro", versaoRoteiro);
+    } else {
+        roteiro = JSON.parse(localStorage.getItem("roteiroViagem"));
+    }
+}
+
 function renderDia(id){
     const container = document.getElementById(id);
     container.innerHTML = "";
@@ -170,16 +186,11 @@ function salvar(){
     localStorage.setItem("roteiroViagem", JSON.stringify(roteiro));
 }
 
-function carregar(){
-    const dados = localStorage.getItem("roteiroViagem");
-    if(dados) roteiro = JSON.parse(dados);
-}
-
 function voltar(){
     window.location.href = "index.html";
 }
 
-carregar();
+inicializar();
 renderDia("dia1");
 renderDia("dia2");
 renderDia("dia3");
