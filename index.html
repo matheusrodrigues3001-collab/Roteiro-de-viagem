@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Locais da Viagem</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg,#dbeafe,#bfdbfe,#e0f2fe);
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+
+.container {
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.75);
+    width: 100%;
+    max-width: 700px;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #1e3a8a;
+}
+
+.dia {
+    margin-top: 18px;
+    border-radius: 16px;
+    background: white;
+    padding: 14px;
+    border: 1px solid #dbeafe;
+}
+
+.dia h2 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #2563eb;
+}
+
+.local {
+    background: #f0f9ff;
+    padding: 8px 10px;
+    border-radius: 10px;
+    margin: 6px 0;
+    font-size: 13px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🗺️ Roteiro da Viagem</h1>
+
+<div class="dia">
+<h2>📍 Dia 1 – Gramado</h2>
+<div class="local">✈️ Aeroporto Galeão → POA</div>
+<div class="local">🏨 Hotel Monte Felice Bosque</div>
+<div class="local">🏙️ Av. Borges de Medeiros</div>
+<div class="local">🌳 Lago Negro + Pedalinho</div>
+<div class="local">🍝 Restaurante Quintanilha</div>
+<div class="local">🍕 Pizzaria Cara de Mau</div>
+</div>
+
+<div class="dia">
+<h2>📍 Dia 2 – Gramado</h2>
+<div class="local">☕ Café da manhã</div>
+<div class="local">❄️ Snowland</div>
+<div class="local">💦 Acqua Motion</div>
+<div class="local">🍫 Casa da Velha Bruxa</div>
+</div>
+
+<div class="dia">
+<h2>📍 Dia 3 – Canela</h2>
+<div class="local">🌄 Pé da Cascata</div>
+<div class="local">🍝 Nostri Nonni</div>
+<div class="local">🌉 Skyglass</div>
+<div class="local">⛪ Catedral de Canela</div>
+</div>
+
+<div class="dia">
+<h2>📍 Dia 4 – Canela</h2>
+<div class="local">🎢 Alpen Park</div>
+<div class="local">🍷 Vinícola Jolimont</div>
+<div class="local">🐴 Passeio de Cavalo</div>
+<div class="local">🚂 Ferrovia Secreta</div>
+</div>
+
+<div class="dia">
+<h2>📍 Dia 5 – Gramado</h2>
+<div class="local">🛍️ Dia Livre</div>
+<div class="local">🍝 Bella Gramado</div>
+<div class="local">✈️ POA → Galeão</div>
+</div>
+
+<button onclick="voltar()">⬅ Voltar ao Início</button>
+
+</div>
+
+<script>
+function voltar(){
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
