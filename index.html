@@ -86,7 +86,10 @@ button.voltar {
 <div class="dia"><h2>📍 Dia 4 – Canela</h2><div class="lista-locais" id="dia4"></div></div>
 <div class="dia"><h2>📍 Dia 5 – Gramado</h2><div class="lista-locais" id="dia5"></div></div>
 
-<button class="voltar" onclick="voltar()">⬅ Voltar ao Início</button>
+<!-- 🔥 BOTÃO AJUSTADO AQUI -->
+<button class="voltar" onclick="window.location.href='https://matheusrodrigues3001-collab.github.io/Pagina-Inicial---Viagem/'">
+⬅ Voltar ao Início
+</button>
 
 </div>
 
@@ -184,11 +187,6 @@ function moverBaixo(dia, index){
 
 function salvar(){
     localStorage.setItem("roteiroViagem", JSON.stringify(roteiro));
-}
-
-/* 🔥 AQUI ESTÁ A ÚNICA ALTERAÇÃO */
-function voltar(){
-    window.location.href = "https://matheusrodrigues3001-collab.github.io/Pagina-Inicial---Viagem/";
 }
 
 inicializar();
