@@ -50,6 +50,16 @@ h1 { text-align: center; color: #1e3a8a; }
     align-items: center;
 }
 
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hora {
+    font-size: 11px;
+    color: #475569;
+}
+
 .acoes button {
     margin-left: 4px;
     border: none;
@@ -80,11 +90,11 @@ button.voltar {
 
 <h1>🗺️ Roteiro da Viagem</h1>
 
-<div class="dia"><h2>📍 Dia 1 – Gramado</h2><div class="lista-locais" id="dia1"></div></div>
-<div class="dia"><h2>📍 Dia 2 – Gramado</h2><div class="lista-locais" id="dia2"></div></div>
-<div class="dia"><h2>📍 Dia 3 – Canela</h2><div class="lista-locais" id="dia3"></div></div>
-<div class="dia"><h2>📍 Dia 4 – Canela</h2><div class="lista-locais" id="dia4"></div></div>
-<div class="dia"><h2>📍 Dia 5 – Volta</h2><div class="lista-locais" id="dia5"></div></div>
+<div class="dia"><h2>📍 Dia 1</h2><div id="dia1"></div></div>
+<div class="dia"><h2>📍 Dia 2</h2><div id="dia2"></div></div>
+<div class="dia"><h2>📍 Dia 3</h2><div id="dia3"></div></div>
+<div class="dia"><h2>📍 Dia 4</h2><div id="dia4"></div></div>
+<div class="dia"><h2>📍 Dia 5</h2><div id="dia5"></div></div>
 
 <button class="voltar" onclick="window.location.href='https://matheusrodrigues3001-collab.github.io/Pagina-Inicial---Viagem/'">
 ⬅ Voltar ao Início
@@ -93,75 +103,62 @@ button.voltar {
 </div>
 
 <script>
-const versaoRoteiro = "v7"; // 🔥 ATUALIZADA
+const versaoRoteiro = "v8";
 
 const roteiroPadrao = {
     dia1: [
-        "⏰ Acordar",
-        "✈️ Aeroporto Galeão → POA",
-        "🚌 Ônibus Citral",
-        "🏨 Hotel Monte Felice Bosque",
-        "🏙️ Av. Borges de Medeiros",
-        "🌳 Lago Negro + Pedalinho",
-        "🍝 Restaurante Quintanilha",
-        "🍰 Royal Trudel",
-        "🏰 Mini Mundo",
-        "🫕 Fondue Chateu d' Geneve",
-        "🏨 Hotel Monte Felice Bosque"
+        {nome:"⏰ Acordar",hora:""},
+        {nome:"✈️ Galeão → POA",hora:""},
+        {nome:"🚌 Ônibus Citral",hora:""},
+        {nome:"🏨 Hotel Monte Felice Bosque",hora:""},
+        {nome:"🏙️ Av. Borges de Medeiros",hora:""},
+        {nome:"🌳 Lago Negro",hora:""},
+        {nome:"🍝 Restaurante Quintanilha",hora:""},
+        {nome:"🍰 Royal Trudel",hora:""},
+        {nome:"🏰 Mini Mundo",hora:""},
+        {nome:"🫕 Fondue Chateu d' Geneve",hora:""},
+        {nome:"🏨 Hotel Monte Felice Bosque",hora:""}
     ],
     dia2: [
-        "⏰ Acordar",
-        "☕ Café da manhã",
-        "❄️ Snowland",
-        "💦 Acqua Motion",
-        "🍽️ Acqua Motion Almoço",
-        "🍫 Casa da Velha Bruxa",
-        "🏨 Hotel Monte Felice Bosque",
-        "🍕 Pizzaria Cara de Mau",
-        "🏨 Hotel Monte Felice Bosque"
+        {nome:"⏰ Acordar",hora:""},
+        {nome:"☕ Café da manhã",hora:""},
+        {nome:"❄️ Snowland",hora:""},
+        {nome:"💦 Acqua Motion",hora:""},
+        {nome:"🍽️ Almoço Acqua Motion",hora:""},
+        {nome:"🏨 Hotel Monte Felice Bosque",hora:""},
+        {nome:"🍕 Pizzaria Cara de Mau",hora:""},
+        {nome:"🏨 Hotel Monte Felice Bosque",hora:""}
     ],
     dia3: [
-        "⏰ Acordar",
-        "☕ Café da manhã",
-        "🚌 Brocker Turismo",
-        "🍰 Casa da Vó Ivone",
-        "🏨 Hotel Monte Felice Bosque",
-        "🏨 Hotel Monte Felice Bosque",
-        "🌄 Pé da Cascata",
-        "🍝 Nostri Nonni",
-        "🌉 Skyglass"
+        {nome:"⏰ Acordar",hora:""},
+        {nome:"☕ Café da manhã",hora:""},
+        {nome:"🚌 Brocker Turismo",hora:""},
+        {nome:"🍰 Casa da Vó Ivone",hora:""},
+        {nome:"🌉 Skyglass",hora:""},
+        {nome:"🏨 Hotel Monte Felice Bosque",hora:""}
     ],
     dia4: [
-        "⏰ Acordar",
-        "☕ Café da manhã",
-        "🍝 Restaurante Vó Eli",
-        "⛪ Catedral de Canela",
-        "🏨 Hotel Monte Felice Bosque",
-        "🏨 Hotel Monte Felice Bosque",
-        "🎢 Alpen Park",
-        "🍷 Vinícola Jolimont",
-        "🐴 Passeio de Cavalo",
-        "🚂 Ferrovia Secreta"
+        {nome:"⏰ Acordar",hora:""},
+        {nome:"☕ Café da manhã",hora:""},
+        {nome:"🍝 Restaurante Vó Eli",hora:""},
+        {nome:"⛪ Catedral de Canela",hora:""},
+        {nome:"🎢 Alpen Park",hora:""},
+        {nome:"🍷 Vinícola Jolimont",hora:""},
+        {nome:"🏨 Hotel Monte Felice Bosque",hora:""}
     ],
     dia5: [
-        "⏰ Acordar",
-        "☕ Café da manhã",
-        "🛍️ Dia Livre",
-        "🥪 Schiacciateria Parmino Panini",
-        "🏨 Hotel Monte Felice Bosque",
-        "🍝 Bella Gramado",
-        "🚌 Ônibus Citral",
-        "🏠 Casa",
-        "✈️ POA → Galeão"
+        {nome:"⏰ Acordar",hora:""},
+        {nome:"☕ Café da manhã",hora:""},
+        {nome:"🥪 Schiacciateria Parmino",hora:""},
+        {nome:"🚌 Ônibus Citral",hora:""},
+        {nome:"🏠 Casa",hora:""}
     ]
 };
 
 let roteiro;
 
 function inicializar(){
-    const versaoSalva = localStorage.getItem("versaoRoteiro");
-
-    if(versaoSalva !== versaoRoteiro){
+    if(localStorage.getItem("versaoRoteiro") !== versaoRoteiro){
         roteiro = roteiroPadrao;
         salvar();
         localStorage.setItem("versaoRoteiro", versaoRoteiro);
@@ -176,29 +173,39 @@ function renderDia(id){
 
     roteiro[id].forEach((local, index) => {
         container.innerHTML += `
-            <div class="local">
-                <span>${local}</span>
-                <div class="acoes">
-                    <button onclick="moverCima('${id}', ${index})">⬆️</button>
-                    <button onclick="moverBaixo('${id}', ${index})">⬇️</button>
-                </div>
+        <div class="local">
+            <div class="info">
+                <span>${local.nome}</span>
+                <span class="hora">🕒 ${local.hora || "Sem horário"}</span>
             </div>
-        `;
+            <div class="acoes">
+                <button onclick="editarHora('${id}',${index})">⏰</button>
+                <button onclick="moverCima('${id}',${index})">⬆️</button>
+                <button onclick="moverBaixo('${id}',${index})">⬇️</button>
+            </div>
+        </div>`;
     });
 }
 
-function moverCima(dia, index){
-    if(index === 0) return;
-    [roteiro[dia][index-1], roteiro[dia][index]] = [roteiro[dia][index], roteiro[dia][index-1]];
-    salvar();
-    renderDia(dia);
+function editarHora(dia,i){
+    const novaHora = prompt("Digite o horário (ex: 14:30):", roteiro[dia][i].hora);
+    if(novaHora !== null){
+        roteiro[dia][i].hora = novaHora;
+        salvar();
+        renderDia(dia);
+    }
 }
 
-function moverBaixo(dia, index){
-    if(index === roteiro[dia].length-1) return;
-    [roteiro[dia][index+1], roteiro[dia][index]] = [roteiro[dia][index], roteiro[dia][index+1]];
-    salvar();
-    renderDia(dia);
+function moverCima(dia,i){
+    if(i===0) return;
+    [roteiro[dia][i-1], roteiro[dia][i]] = [roteiro[dia][i], roteiro[dia][i-1]];
+    salvar(); renderDia(dia);
+}
+
+function moverBaixo(dia,i){
+    if(i===roteiro[dia].length-1) return;
+    [roteiro[dia][i+1], roteiro[dia][i]] = [roteiro[dia][i], roteiro[dia][i+1]];
+    salvar(); renderDia(dia);
 }
 
 function salvar(){
