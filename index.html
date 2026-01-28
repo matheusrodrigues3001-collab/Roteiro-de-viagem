@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Locais da Viagem</title>
+<title>Roteiro da Viagem</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -52,9 +52,23 @@ h1 {
     border-radius: 10px;
     margin: 6px 0;
     font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-button {
+.acoes button {
+    margin-left: 4px;
+    border: none;
+    border-radius: 6px;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 12px;
+    background: #3b82f6;
+    color: white;
+}
+
+button.voltar {
     width: 100%;
     padding: 10px;
     margin-top: 18px;
@@ -73,55 +87,106 @@ button {
 
 <h1>🗺️ Roteiro da Viagem</h1>
 
-<div class="dia">
-<h2>📍 Dia 1 – Gramado</h2>
-<div class="local">✈️ Aeroporto Galeão → POA</div>
-<div class="local">🏨 Hotel Monte Felice Bosque</div>
-<div class="local">🏙️ Av. Borges de Medeiros</div>
-<div class="local">🌳 Lago Negro + Pedalinho</div>
-<div class="local">🍝 Restaurante Quintanilha</div>
-<div class="local">🍕 Pizzaria Cara de Mau</div>
-</div>
+<div class="dia"><h2>📍 Dia 1 – Gramado</h2><div class="lista-locais" id="dia1"></div></div>
+<div class="dia"><h2>📍 Dia 2 – Gramado</h2><div class="lista-locais" id="dia2"></div></div>
+<div class="dia"><h2>📍 Dia 3 – Canela</h2><div class="lista-locais" id="dia3"></div></div>
+<div class="dia"><h2>📍 Dia 4 – Canela</h2><div class="lista-locais" id="dia4"></div></div>
+<div class="dia"><h2>📍 Dia 5 – Gramado</h2><div class="lista-locais" id="dia5"></div></div>
 
-<div class="dia">
-<h2>📍 Dia 2 – Gramado</h2>
-<div class="local">☕ Café da manhã</div>
-<div class="local">❄️ Snowland</div>
-<div class="local">💦 Acqua Motion</div>
-<div class="local">🍫 Casa da Velha Bruxa</div>
-</div>
-
-<div class="dia">
-<h2>📍 Dia 3 – Canela</h2>
-<div class="local">🌄 Pé da Cascata</div>
-<div class="local">🍝 Nostri Nonni</div>
-<div class="local">🌉 Skyglass</div>
-<div class="local">⛪ Catedral de Canela</div>
-</div>
-
-<div class="dia">
-<h2>📍 Dia 4 – Canela</h2>
-<div class="local">🎢 Alpen Park</div>
-<div class="local">🍷 Vinícola Jolimont</div>
-<div class="local">🐴 Passeio de Cavalo</div>
-<div class="local">🚂 Ferrovia Secreta</div>
-</div>
-
-<div class="dia">
-<h2>📍 Dia 5 – Gramado</h2>
-<div class="local">🛍️ Dia Livre</div>
-<div class="local">🍝 Bella Gramado</div>
-<div class="local">✈️ POA → Galeão</div>
-</div>
-
-<button onclick="voltar()">⬅ Voltar ao Início</button>
+<button class="voltar" onclick="voltar()">⬅ Voltar ao Início</button>
 
 </div>
 
 <script>
+let roteiro = {
+    dia1: [
+        "⏰ Acordar",
+        "✈️ Aeroporto Galeão → POA",
+        "🚌 Ônibus Citral",
+        "🏨 Hotel Monte Felice Bosque",
+        "🏙️ Av. Borges de Medeiros",
+        "🌳 Lago Negro + Pedalinho",
+        "🍝 Restaurante Quintanilha",
+        "🍰 Royal Trudel",
+        "🍕 Pizzaria Cara de Mau",
+        "🫕 Fondue Chateu d' Geneve",
+        "🏨 Hotel Monte Felice Bosque"
+    ],
+    dia2: [
+        "☕ Café da manhã",
+        "❄️ Snowland",
+        "💦 Acqua Motion",
+        "🍫 Casa da Velha Bruxa"
+    ],
+    dia3: [
+        "🌄 Pé da Cascata",
+        "🍝 Nostri Nonni",
+        "🌉 Skyglass",
+        "⛪ Catedral de Canela"
+    ],
+    dia4: [
+        "🎢 Alpen Park",
+        "🍷 Vinícola Jolimont",
+        "🐴 Passeio de Cavalo",
+        "🚂 Ferrovia Secreta"
+    ],
+    dia5: [
+        "🛍️ Dia Livre",
+        "🍝 Bella Gramado",
+        "✈️ POA → Galeão"
+    ]
+};
+
+function renderDia(id){
+    const container = document.getElementById(id);
+    container.innerHTML = "";
+
+    roteiro[id].forEach((local, index) => {
+        container.innerHTML += `
+            <div class="local">
+                <span>${local}</span>
+                <div class="acoes">
+                    <button onclick="moverCima('${id}', ${index})">⬆️</button>
+                    <button onclick="moverBaixo('${id}', ${index})">⬇️</button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function moverCima(dia, index){
+    if(index === 0) return;
+    [roteiro[dia][index-1], roteiro[dia][index]] = [roteiro[dia][index], roteiro[dia][index-1]];
+    salvar();
+    renderDia(dia);
+}
+
+function moverBaixo(dia, index){
+    if(index === roteiro[dia].length-1) return;
+    [roteiro[dia][index+1], roteiro[dia][index]] = [roteiro[dia][index], roteiro[dia][index+1]];
+    salvar();
+    renderDia(dia);
+}
+
+function salvar(){
+    localStorage.setItem("roteiroViagem", JSON.stringify(roteiro));
+}
+
+function carregar(){
+    const dados = localStorage.getItem("roteiroViagem");
+    if(dados) roteiro = JSON.parse(dados);
+}
+
 function voltar(){
     window.location.href = "index.html";
 }
+
+carregar();
+renderDia("dia1");
+renderDia("dia2");
+renderDia("dia3");
+renderDia("dia4");
+renderDia("dia5");
 </script>
 
 </body>
